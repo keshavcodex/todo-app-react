@@ -5,6 +5,7 @@ import Todo from './screen/Todo';
 
 const App = () => {
 	return (
+		// Providing the Redux store to the entire application using Provider
 		<Provider store={store}>
 			<Todo />
 		</Provider>

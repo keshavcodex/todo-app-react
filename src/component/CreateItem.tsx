@@ -5,25 +5,37 @@ import { setTodoInfo } from '../store/store';
 import { get } from 'http';
 
 const CreateItem = () => {
+	// State to manage input text for new todo item
 	const [itemText, setItemText] = useState('');
+	
+	// Accessing todoList from Redux store
 	const todoList = useSelector((state: any) => state.todo.todoInfo);
-	const dispatch = useDispatch();
+	const dispatch = useDispatch(); // Accessing dispatch function
 
+	// Function to handle adding a new todo item
 	const handleAddItem = () => {
+		// Creating a new todo object with default ticked status and input content
 		const newTodo = { ticked: false, content: itemText };
+		// Creating a new array with the updated todoList by adding the new todo object
 		const updatedTodoList = [...todoList, newTodo]
+		// Dispatching an action to update todoList in Redux store
 		dispatch(setTodoInfo(updatedTodoList));
+		// Storing updated todoList in local storage
 		localStorage.setItem('todoList', JSON.stringify(updatedTodoList));
+		// Clearing input text after adding the new todo item
 		setItemText('');
 	};
+
 	return (
 		<Box sx={{ display: 'flex', mb: 1 }}>
+			{/* Text input for new todo item */}
 			<TextField
 				variant='standard'
 				value={itemText}
 				onChange={(e) => setItemText(e.target.value)}
 				fullWidth
 			/>
+			{/* Button to add the new todo item */}
 			<Button
 				onClick={handleAddItem}
 				size='small'
@@ -34,5 +46,4 @@ const CreateItem = () => {
 		</Box>
 	);
 };
-
 export default CreateItem;
