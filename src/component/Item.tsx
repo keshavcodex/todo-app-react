@@ -17,6 +17,7 @@ const Item = () => {
 	useEffect(() => {
 		const getLocalData = localStorage.getItem('todoList');
 		if (getLocalData) dispatch(setTodoInfo(JSON.parse(getLocalData)));
+		// eslint-disable-next-line
 	}, []);
 
 	// Handle toggling of ticked property for a todo item

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Box, Button, TextField } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTodoInfo } from '../store/store';
-import { get } from 'http';
 
 const CreateItem = () => {
 	// State to manage input text for new todo item
