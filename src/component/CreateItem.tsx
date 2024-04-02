@@ -6,7 +6,7 @@ import { setTodoInfo } from '../store/store';
 const CreateItem = () => {
 	// State to manage input text for new todo item
 	const [itemText, setItemText] = useState('');
-	
+
 	// Accessing todoList from Redux store
 	const todoList = useSelector((state: any) => state.todo.todoInfo);
 	const dispatch = useDispatch(); // Accessing dispatch function
@@ -16,7 +16,7 @@ const CreateItem = () => {
 		// Creating a new todo object with default ticked status and input content
 		const newTodo = { ticked: false, content: itemText };
 		// Creating a new array with the updated todoList by adding the new todo object
-		const updatedTodoList = [...todoList, newTodo]
+		const updatedTodoList = [...todoList, newTodo];
 		// Dispatching an action to update todoList in Redux store
 		dispatch(setTodoInfo(updatedTodoList));
 		// Storing updated todoList in local storage
@@ -29,10 +29,17 @@ const CreateItem = () => {
 		<Box sx={{ display: 'flex', mb: 1 }}>
 			{/* Text input for new todo item */}
 			<TextField
+				placeholder='write here...'
 				variant='standard'
 				value={itemText}
 				onChange={(e) => setItemText(e.target.value)}
 				fullWidth
+				onKeyDown={(e) => {
+					if (e.key === 'Enter') {
+						handleAddItem();
+						// Call handleAddItem function if Enter key is pressed
+					}
+				}}
 			/>
 			{/* Button to add the new todo item */}
 			<Button
